@@ -1,0 +1,21 @@
+﻿name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Verify required files
+        run: |
+          test -f index.html
+          test -f app.js
+          test -f styles.css
+          test -f api/config.js
+          test -f supabase/migrations/20260715000000_video_workspace.sql
